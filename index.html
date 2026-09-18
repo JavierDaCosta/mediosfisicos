@@ -5,143 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CCNA · Medios físicos</title>
   <style>
-    :root {
-      --bg: #00457C;
-      --panel: #003666;
-      --text: #f1f5f9;
-      --muted: #c5d7ea;
-      --line: #2a6aa0;
-      --ok: #22c55e;
-      --bad: #ef4444;
-      --accent: #F99800;
-      --utp: #0ea5e9;
-      --fibra: #10b981;
-    }
+    :root { --bg:#00457C; --panel:#003666; --text:#f1f5f9; --muted:#c5d7ea; --line:#2a6aa0; --ok:#22c55e; --bad:#ef4444; --accent:#F99800; --utp:#0ea5e9; --fibra:#10b981; --wifi:#a855f7; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 20px;
-    }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 20px; }
     .wrap { max-width: 1180px; margin: 0 auto; }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 18px;
-    }
-    h1 { font-size: 1.45rem; font-weight: 750; letter-spacing: -0.02em; }
-    h1 span { color: var(--accent); }
-    .subtitle { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
-    .stats { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .badge, button.btn {
-      border: 1px solid var(--line);
-      background: var(--panel);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.88rem;
-      font-weight: 600;
-    }
-    button.btn { cursor: pointer; }
-    button.btn.primary { background: #0369a1; border-color: #0284c7; }
-    .board { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; }
-    @media (max-width: 860px) { .board { grid-template-columns: 1fr; } }
-    .stack, .bank {
-      background: rgba(0, 54, 102, 0.72);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-    }
-    .section-title {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-    .layer {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 10px;
-      align-items: stretch;
-      margin-bottom: 12px;
-      min-height: 88px;
-    }
-    .layer-meta {
-      border-radius: 12px;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      color: #fff;
-    }
-    .layer-meta .num { font-size: 1.05rem; font-weight: 800; }
-    .layer-meta .name { font-size: 0.72rem; font-weight: 600; opacity: .92; margin-top: 4px; }
-    .drop {
-      border: 2px dashed #475569;
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.45);
-      min-height: 88px;
-      padding: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
-    .drop.over { border-color: var(--accent); background: rgba(249, 152, 0, 0.16); }
-    .drop.ok-flash { border-color: var(--ok); background: rgba(34, 197, 94, 0.12); }
-    .drop.bad-flash { border-color: var(--bad); background: rgba(239, 68, 68, 0.12); }
-    .chip {
-      user-select: none;
-      touch-action: none;
-      cursor: grab;
-      background: #0f172a;
-      border: 1px solid #64748b;
-      color: #fff;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-weight: 700;
-      font-size: 0.86rem;
-      line-height: 1.35;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      max-width: 100%;
-    }
-    .chip.dragging { opacity: 0.35; }
-    .chip.locked { cursor: default; border-color: transparent; }
-    .bank-grid { display: flex; flex-direction: column; gap: 8px; min-height: 120px; }
-    .ghost { position: fixed; pointer-events: none; z-index: 50; margin: 0; }
-    .hint { margin-top: 12px; color: var(--muted); font-size: 0.82rem; line-height: 1.45; }
-    .feedback {
-      margin-top: 14px;
-      border-radius: 12px;
-      padding: 12px 14px;
-      background: #0b1220;
-      border: 1px solid var(--line);
-      min-height: 52px;
-      font-size: 0.9rem;
-      color: #cbd5e1;
-    }
-    .feedback strong { color: #fff; }
-    .win {
-      display: none;
-      margin-top: 14px;
-      padding: 14px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(14,165,233,.12));
-      border: 1px solid rgba(16,185,129,.4);
-    }
-    .win.show { display: block; }
-    .win h2 { font-size: 1.05rem; margin-bottom: 8px; }
-    .win ul { margin-left: 18px; color: #d1fae5; font-size: 0.86rem; line-height: 1.55; }
-    .note { margin-top: 10px; font-size: 0.78rem; color: #64748b; }
+    header { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; margin-bottom:18px; }
+    h1 { font-size:1.45rem; font-weight:750; } h1 span { color: var(--accent); }
+    .subtitle { color: var(--muted); font-size:0.92rem; margin-top:4px; }
+    .stats { display:flex; gap:10px; align-items:center; }
+    .badge, button.btn { border:1px solid var(--line); background:var(--panel); color:var(--text); border-radius:999px; padding:8px 14px; font-size:0.88rem; font-weight:600; }
+    button.btn { cursor:pointer; } button.btn.primary { background:#0369a1; border-color:#0284c7; }
+    .board { display:grid; grid-template-columns:1.15fr 1fr; gap:18px; }
+    @media (max-width:860px) { .board { grid-template-columns:1fr; } }
+    .stack, .bank { background:rgba(0,54,102,.72); border:1px solid var(--line); border-radius:18px; padding:16px; }
+    .section-title { font-size:0.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin-bottom:12px; font-weight:700; }
+    .layer { display:grid; grid-template-columns:120px 1fr; gap:10px; margin-bottom:12px; min-height:96px; }
+    .layer-meta { border-radius:12px; padding:10px; display:flex; flex-direction:column; justify-content:center; color:#fff; }
+    .layer-meta .num { font-size:1.05rem; font-weight:800; }
+    .layer-meta .name { font-size:0.72rem; font-weight:600; opacity:.92; margin-top:4px; }
+    .drop { border:2px dashed #475569; border-radius:12px; background:rgba(15,23,42,.45); min-height:96px; padding:8px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .drop.over { border-color:var(--accent); background:rgba(249,152,0,.16); }
+    .drop.ok-flash { border-color:var(--ok); background:rgba(34,197,94,.12); }
+    .drop.bad-flash { border-color:var(--bad); background:rgba(239,68,68,.12); }
+    .chip { user-select:none; touch-action:none; cursor:grab; background:#0f172a; border:1px solid #64748b; color:#fff; border-radius:10px; padding:10px 12px; font-weight:700; font-size:0.86rem; line-height:1.35; display:inline-flex; max-width:100%; }
+    .chip.dragging { opacity:.35; } .chip.locked { cursor:default; border-color:transparent; }
+    .bank-grid { display:flex; flex-direction:column; gap:8px; min-height:120px; }
+    .ghost { position:fixed; pointer-events:none; z-index:50; margin:0; }
+    .hint { margin-top:12px; color:var(--muted); font-size:0.82rem; line-height:1.45; }
+    .feedback { margin-top:14px; border-radius:12px; padding:12px 14px; background:#0b1220; border:1px solid var(--line); min-height:52px; font-size:0.9rem; color:#cbd5e1; }
+    .feedback strong { color:#fff; }
+    .win { display:none; margin-top:14px; padding:14px; border-radius:14px; background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(14,165,233,.12)); border:1px solid rgba(16,185,129,.4); }
+    .win.show { display:block; } .win h2 { font-size:1.05rem; margin-bottom:8px; }
+    .win ul { margin-left:18px; color:#d1fae5; font-size:0.86rem; line-height:1.55; }
+    .note { margin-top:10px; font-size:0.78rem; color:#64748b; }
   </style>
 </head>
 <body>
@@ -152,38 +48,30 @@
         <p class="subtitle">¿Qué tipo de conexión utilizaremos?</p>
       </div>
       <div class="stats">
-        <div class="badge" id="score">Aciertos: 0 / 2</div>
+        <div class="badge" id="score">Aciertos: 0 / 5</div>
         <button class="btn primary" id="btnReset" type="button">Reiniciar</button>
       </div>
     </header>
     <div class="board">
       <section class="stack">
         <div class="section-title">Tipo de conexión</div>
-        <div class="layer">
-          <div class="layer-meta" style="background:var(--utp)">
-            <div class="num">UTP</div>
-            <div class="name">Par trenzado</div>
-          </div>
-          <div class="drop" data-layer="utp"></div>
-        </div>
-        <div class="layer">
-          <div class="layer-meta" style="background:var(--fibra)">
-            <div class="num">FIBRA</div>
-            <div class="name">Fibra óptica</div>
-          </div>
-          <div class="drop" data-layer="fibra"></div>
-        </div>
+        <div class="layer"><div class="layer-meta" style="background:var(--utp)"><div class="num">UTP</div><div class="name">Par trenzado</div></div><div class="drop" data-layer="utp"></div></div>
+        <div class="layer"><div class="layer-meta" style="background:var(--fibra)"><div class="num">FIBRA</div><div class="name">Fibra óptica</div></div><div class="drop" data-layer="fibra"></div></div>
+        <div class="layer"><div class="layer-meta" style="background:var(--wifi)"><div class="num">Wi-Fi</div><div class="name">Inalámbrico</div></div><div class="drop" data-layer="wifi"></div></div>
       </section>
       <aside class="bank">
         <div class="section-title">Escenarios</div>
         <div class="bank-grid" id="bank"></div>
         <p class="hint">Arrastra cada escenario al medio físico adecuado. Si fallas, la ficha vuelve.</p>
-        <div class="feedback" id="feedback">Coloca los 2 escenarios.</div>
+        <div class="feedback" id="feedback">Coloca los 5 escenarios.</div>
         <div class="win" id="win">
           <h2>Actividad completada</h2>
           <ul>
             <li>70 m dentro de planta → <strong>UTP</strong></li>
-            <li>2 km entre edificios, con interferencia electromagnética → <strong>FIBRA</strong></li>
+            <li>20 PCs al switch de acceso, 40 m → <strong>UTP</strong></li>
+            <li>2 km entre edificios → <strong>FIBRA</strong></li>
+            <li>Fuerte interferencia electromagnética → <strong>FIBRA</strong></li>
+            <li>Portátiles e invitados en cafetería → <strong>Wi-Fi</strong></li>
           </ul>
         </div>
         <p class="note">Formación Servicios TIC / CCNA · Medios físicos</p>
@@ -191,28 +79,22 @@
     </div>
   </div>
   <script>
-    const TOTAL = 2;
+    const TOTAL = 5;
     const ITEMS = [
-      { id: "planta", label: "70 m dentro de planta", layer: "utp", why: "En distancias cortas dentro del mismo edificio el UTP es suficiente y más económico." },
-      { id: "edificios", label: "2 km entre edificios, entorno con fuerte interferencia electromagnética", layer: "fibra", why: "A 2 km y con interferencia electromagnética la fibra es el medio adecuado: más alcance e inmunidad al EMI." }
+      { id:"planta", label:"70 m dentro de planta", layer:"utp", why:"El UTP cubre hasta unos 100 m. A 70 m dentro de planta es el medio habitual." },
+      { id:"puestos", label:"20 PCs al switch de acceso de la misma planta, 40 m", layer:"utp", why:"Puesto de trabajo a switch de acceso, corta distancia y sin requisitos especiales: UTP." },
+      { id:"edificios", label:"2 km entre edificios", layer:"fibra", why:"2 km supera el límite del cobre Ethernet. Se usa fibra entre edificios." },
+      { id:"emi", label:"Entorno con fuerte interferencia electromagnética", layer:"fibra", why:"La fibra es inmune al EMI. El UTP se degrada junto a motores o alta tensión." },
+      { id:"cafeteria", label:"Portátiles e invitados en cafetería y salas de reuniones", layer:"wifi", why:"Usuarios móviles, sin puesto fijo y sin cablear cada mesa: Wi-Fi." }
     ];
-    const NAMES = { utp: "UTP", fibra: "FIBRA" };
+    const NAMES = { utp:"UTP", fibra:"FIBRA", wifi:"Wi-Fi" };
     const bank = document.getElementById("bank");
     const scoreEl = document.getElementById("score");
     const feedback = document.getElementById("feedback");
     const win = document.getElementById("win");
     const drops = [...document.querySelectorAll(".drop")];
-    let placed = new Set();
-    let drag = null;
-    let ghost = null;
-    function shuffle(arr) {
-      const a = [...arr];
-      for (let i = a.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [a[i], a[j]] = [a[j], a[i]];
-      }
-      return a;
-    }
+    let placed = new Set(); let drag = null; let ghost = null;
+    function shuffle(arr) { const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
     function makeChip(item, locked) {
       const el = document.createElement("div");
       el.className = "chip" + (locked ? " locked" : "");
@@ -221,93 +103,58 @@
       if (!locked) bindDrag(el);
       return el;
     }
-    function renderBank(list) {
-      bank.innerHTML = "";
-      list.forEach((item) => bank.appendChild(makeChip(item, false)));
-    }
+    function renderBank(list) { bank.innerHTML=""; list.forEach(function(item){ bank.appendChild(makeChip(item,false)); }); }
     function updateScore() {
       scoreEl.textContent = "Aciertos: " + placed.size + " / " + TOTAL;
-      if (placed.size === TOTAL) {
-        win.classList.add("show");
-        feedback.innerHTML = "<strong>Perfecto.</strong> Has asociado los 2 escenarios.";
-      } else {
-        win.classList.remove("show");
-      }
+      if (placed.size === TOTAL) { win.classList.add("show"); feedback.innerHTML="<strong>Perfecto.</strong> Has asociado los 5 escenarios."; }
+      else { win.classList.remove("show"); }
     }
-    function flash(zone, type) {
-      zone.classList.add(type);
-      setTimeout(function() { zone.classList.remove(type); }, 380);
-    }
+    function flash(zone, type) { zone.classList.add(type); setTimeout(function(){ zone.classList.remove(type); }, 380); }
     function bindDrag(el) {
       el.addEventListener("pointerdown", function(e) {
         if (el.classList.contains("locked")) return;
         e.preventDefault();
-        const item = ITEMS.find(function(i) { return i.id === el.dataset.id; });
+        const item = ITEMS.find(function(i){ return i.id === el.dataset.id; });
         const rect = el.getBoundingClientRect();
-        drag = { el: el, item: item, offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top };
-        ghost = el.cloneNode(true);
-        ghost.classList.add("ghost");
-        ghost.style.width = rect.width + "px";
-        ghost.style.left = rect.left + "px";
-        ghost.style.top = rect.top + "px";
-        document.body.appendChild(ghost);
-        el.classList.add("dragging");
-        el.setPointerCapture(e.pointerId);
+        drag = { el:el, item:item, offsetX:e.clientX-rect.left, offsetY:e.clientY-rect.top };
+        ghost = el.cloneNode(true); ghost.classList.add("ghost");
+        ghost.style.width = rect.width+"px"; ghost.style.left = rect.left+"px"; ghost.style.top = rect.top+"px";
+        document.body.appendChild(ghost); el.classList.add("dragging"); el.setPointerCapture(e.pointerId);
       });
       el.addEventListener("pointermove", function(e) {
         if (!drag || drag.el !== el) return;
-        ghost.style.left = (e.clientX - drag.offsetX) + "px";
-        ghost.style.top = (e.clientY - drag.offsetY) + "px";
+        ghost.style.left = (e.clientX-drag.offsetX)+"px"; ghost.style.top = (e.clientY-drag.offsetY)+"px";
         const target = document.elementFromPoint(e.clientX, e.clientY);
-        drops.forEach(function(d) { d.classList.remove("over"); });
-        const zone = target && target.closest(".drop");
-        if (zone) zone.classList.add("over");
+        drops.forEach(function(d){ d.classList.remove("over"); });
+        const zone = target && target.closest(".drop"); if (zone) zone.classList.add("over");
       });
       el.addEventListener("pointerup", function(e) {
         if (!drag || drag.el !== el) return;
         const target = document.elementFromPoint(e.clientX, e.clientY);
         const zone = target && target.closest(".drop");
-        drops.forEach(function(d) { d.classList.remove("over"); });
+        drops.forEach(function(d){ d.classList.remove("over"); });
         finishDrop(zone);
       });
-      el.addEventListener("pointercancel", function() {
-        if (!drag || drag.el !== el) return;
-        cleanupDrag();
-      });
+      el.addEventListener("pointercancel", function(){ if (!drag || drag.el !== el) return; cleanupDrag(); });
     }
-    function cleanupDrag() {
-      if (ghost) ghost.remove();
-      if (drag) drag.el.classList.remove("dragging");
-      ghost = null;
-      drag = null;
-    }
+    function cleanupDrag() { if (ghost) ghost.remove(); if (drag) drag.el.classList.remove("dragging"); ghost=null; drag=null; }
     function finishDrop(zone) {
-      const current = drag;
-      cleanupDrag();
-      if (!current) return;
-      if (!zone) {
-        feedback.textContent = "Suelta la ficha sobre UTP o FIBRA.";
-        return;
-      }
+      const current = drag; cleanupDrag(); if (!current) return;
+      if (!zone) { feedback.textContent = "Suelta la ficha sobre UTP, FIBRA o Wi-Fi."; return; }
       const layer = zone.dataset.layer;
       if (layer === current.item.layer) {
-        placed.add(current.item.id);
-        current.el.remove();
-        zone.appendChild(makeChip(current.item, true));
-        flash(zone, "ok-flash");
-        feedback.innerHTML = "<strong>" + current.item.label + "</strong> → " + NAMES[layer] + ". " + current.item.why;
+        placed.add(current.item.id); current.el.remove();
+        zone.appendChild(makeChip(current.item, true)); flash(zone, "ok-flash");
+        feedback.innerHTML = "<strong>"+current.item.label+"</strong> → "+NAMES[layer]+". "+current.item.why;
         updateScore();
       } else {
         flash(zone, "bad-flash");
-        feedback.innerHTML = "<strong>" + current.item.label + "</strong> no corresponde a " + NAMES[layer] + ". Prueba otra.";
+        feedback.innerHTML = "<strong>"+current.item.label+"</strong> no corresponde a "+NAMES[layer]+". Prueba otra.";
       }
     }
     function reset() {
-      placed.clear();
-      drops.forEach(function(d) { d.innerHTML = ""; });
-      renderBank(shuffle(ITEMS));
-      feedback.textContent = "Coloca los 2 escenarios.";
-      updateScore();
+      placed.clear(); drops.forEach(function(d){ d.innerHTML=""; });
+      renderBank(shuffle(ITEMS)); feedback.textContent="Coloca los 5 escenarios."; updateScore();
     }
     document.getElementById("btnReset").addEventListener("click", reset);
     reset();
